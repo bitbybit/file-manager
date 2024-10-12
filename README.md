@@ -15,7 +15,7 @@
 - Use 22.x.x version (22.9.0 or upper) of Node.js
 - The program is started by npm-script `start` in following way:
 ```bash
-npm run start -- --username=your_username
+npm run start -- -- --username=your_username
 ```
 - After starting the program displays the following text in the console (`Username` is equal to value that was passed on application start in `--username` CLI argument)  
 `Welcome to the File Manager, Username!`  
