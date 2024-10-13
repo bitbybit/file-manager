@@ -1,4 +1,4 @@
-import { getArgsValue } from './args.js'
+import { getArgsValue } from './cli.js'
 
 const USERNAME_ARG_DEFAULT = '--username'
 
