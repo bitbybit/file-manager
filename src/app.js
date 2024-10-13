@@ -31,7 +31,7 @@ const commandHandler = async (input) => {
         break
 
       default:
-        unknownHandler()
+        await unknownHandler()
         break
     }
   } catch {
