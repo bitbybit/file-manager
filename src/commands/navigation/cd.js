@@ -1,5 +1,5 @@
 import { isCommand } from '../../helpers/common.js'
-import { canAccessPath } from '../../helpers/fs.js'
+import { isDirectory } from '../../helpers/fs.js'
 import { store } from '../../store.js'
 import path from 'node:path'
 
@@ -26,7 +26,7 @@ export const navigationCdHandler = async (input) => {
   const newDirectory = path.isAbsolute(props) ?
     path.resolve(props) : path.join(store.directory, props)
 
-  const canAccess = await canAccessPath(newDirectory)
+  const canAccess = await isDirectory(newDirectory)
 
   if (!canAccess) {
     throw new Error(`Can not access ${newDirectory}`)
