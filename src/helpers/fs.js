@@ -25,6 +25,7 @@ export const canAccessPath = async (path) => {
  * @description Check if path is a directory
  * @param {string} path
  * @returns {Promise<boolean>}
+ * @throws {Error}
  */
 export const isDirectory = async (path) => {
   try {
