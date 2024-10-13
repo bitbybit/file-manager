@@ -10,6 +10,7 @@ import { unknownHandler } from './commands/unknown.js'
 import { isCommandNavigationUp, navigationUpHandler } from './commands/navigation/up.js'
 import { isCommandNavigationCd, navigationCdHandler } from './commands/navigation/cd.js'
 import { isCommandNavigationLs, navigationLsHandler } from './commands/navigation/ls.js'
+import { fsCatHandler, isCommandFsCat } from './commands/fs/cat.js'
 
 /**
  * @description After program work finished (`ctrl` + `c` pressed or user sent `.exit` command into console) the program displays the following text in the console
@@ -38,6 +39,10 @@ const commandHandler = async (input) => {
 
       case isCommandNavigationLs(input):
         await navigationLsHandler()
+        break
+
+      case isCommandFsCat(input):
+        await fsCatHandler(input)
         break
 
       default:
