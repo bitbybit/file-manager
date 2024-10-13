@@ -2,6 +2,8 @@ import { getArgsValue } from './cli.js'
 
 const USERNAME_ARG_DEFAULT = '--username'
 
+export const COMMAND_SEPARATOR = ' '
+
 /**
  * @description Display greeting message
  * @param {string} userNameArg
