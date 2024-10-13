@@ -20,3 +20,24 @@ export const canAccessPath = async (path) => {
 
   return canAccess
 }
+
+/**
+ * @description Get file type description
+ * @param {Dirent} file
+ * @returns {string}
+ */
+export const getFileType = (file) => {
+  switch (true) {
+    case file.isFile():
+      return 'file'
+
+    case file.isDirectory():
+      return 'directory'
+
+    case file.isSymbolicLink():
+      return 'symbolic link'
+
+    default:
+      return 'unknown'
+  }
+}

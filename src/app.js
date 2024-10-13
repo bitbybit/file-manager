@@ -6,9 +6,10 @@ import {
   displayWorkingDirectory
 } from './helpers/common.js'
 import { store } from './store.js'
-import { isCommandNavigationUp, navigationUpHandler } from './commands/navigation/up.js'
 import { unknownHandler } from './commands/unknown.js'
+import { isCommandNavigationUp, navigationUpHandler } from './commands/navigation/up.js'
 import { isCommandNavigationCd, navigationCdHandler } from './commands/navigation/cd.js'
+import { isCommandNavigationLs, navigationLsHandler } from './commands/navigation/ls.js'
 
 /**
  * @description After program work finished (`ctrl` + `c` pressed or user sent `.exit` command into console) the program displays the following text in the console
@@ -33,6 +34,10 @@ const commandHandler = async (input) => {
 
       case isCommandNavigationCd(input):
         await navigationCdHandler(input)
+        break
+
+      case isCommandNavigationLs(input):
+        await navigationLsHandler()
         break
 
       default:
