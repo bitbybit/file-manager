@@ -27,16 +27,14 @@ export const fsRnHandler = async (input) => {
   const fileName = props[0]
   const fileNameRenamed = props.slice(1).join(COMMAND_SEPARATOR)
 
-  if (isForbiddenFileName(fileName)) {
-    throw new Error(`${fileName} is not a valid file name`)
-  }
-
   if (isForbiddenFileName(fileNameRenamed)) {
     throw new Error(`${fileNameRenamed} is not a valid file name`)
   }
 
-  const pathToFile = path.join(store.directory, fileName)
-  const pathToFileRenamed = path.join(store.directory, fileNameRenamed)
+  const pathToFile = path.isAbsolute(fileName) ?
+    path.resolve(fileName) : path.join(store.directory, fileName)
+
+  const pathToFileRenamed = path.join(path.dirname(pathToFile), fileNameRenamed)
 
   const fileRenamedExists = await canAccessPath(pathToFileRenamed)
 
