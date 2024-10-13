@@ -1,14 +1,10 @@
-import { getArgsValue } from './cli.js'
-
-const USERNAME_ARG_DEFAULT = '--username'
-
-export const COMMAND_SEPARATOR = ' '
+import { ARG_NAME_USERNAME, getArgsValue } from './cli.js'
 
 /**
  * @description Display greeting message
  * @param {string} userNameArg
  */
-export const displayGreeting = (userNameArg = USERNAME_ARG_DEFAULT) => {
+export const displayGreeting = (userNameArg = ARG_NAME_USERNAME) => {
   const userName = getArgsValue(userNameArg)
 
   console.log(`Welcome to the File Manager, ${userName}!`)
@@ -18,7 +14,7 @@ export const displayGreeting = (userNameArg = USERNAME_ARG_DEFAULT) => {
  * @description Display goodbye message
  * @param {string} userNameArg
  */
-export const displayGoodbye = (userNameArg = USERNAME_ARG_DEFAULT) => {
+export const displayGoodbye = (userNameArg = ARG_NAME_USERNAME) => {
   const userName = getArgsValue(userNameArg)
 
   console.log(`Thank you for using File Manager, ${userName}, goodbye!`)
@@ -44,14 +40,4 @@ export const displayOperationFailed = () => {
  */
 export const displayWorkingDirectory = (path) => {
   console.log(`You are currently in ${path}`)
-}
-
-/**
- * @description Determine which command was executed
- * @param {string} input
- * @param {string} name
- * @returns {boolean}
- */
-export const isCommand = (input, name) => {
-  return input.toLowerCase().startsWith(name)
 }

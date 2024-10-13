@@ -1,4 +1,4 @@
-import { isCommand } from '../../helpers/common.js'
+import { isCommand } from '../../helpers/cli.js'
 import { getFileType } from '../../helpers/fs.js'
 import { store } from '../../store.js'
 import fs from 'node:fs/promises'

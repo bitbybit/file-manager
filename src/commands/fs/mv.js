@@ -1,4 +1,4 @@
-import { COMMAND_SEPARATOR, isCommand } from '../../helpers/common.js'
+import { COMMAND_SEPARATOR, isCommand } from '../../helpers/cli.js'
 import { copyFileToDirectory } from '../../helpers/fs.js'
 import { store } from '../../store.js'
 import fs from 'node:fs/promises'

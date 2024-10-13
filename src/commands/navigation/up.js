@@ -1,4 +1,4 @@
-import { isCommand } from '../../helpers/common.js'
+import { isCommand } from '../../helpers/cli.js'
 import { store } from '../../store.js'
 import path from 'node:path'
 
