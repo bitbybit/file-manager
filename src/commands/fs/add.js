@@ -1,4 +1,5 @@
 import { isCommand } from '../../helpers/common.js'
+import { isForbiddenFileName } from '../../helpers/fs.js'
 import { store } from '../../store.js'
 import fs from 'node:fs/promises'
 import path from 'node:path'
@@ -23,12 +24,11 @@ export const isCommandFsAdd = (input) => {
 export const fsAddHandler = async (input) => {
   const props = input.substring(name.length).trim()
 
-  if (props.match(/[\/\\:]/)) {
+  if (isForbiddenFileName(props)) {
     throw new Error(`${props} is not a valid file name`)
   }
 
-  const pathToFile = path.isAbsolute(props) ?
-    path.resolve(props) : path.join(store.directory, props)
+  const pathToFile = path.join(store.directory, props)
 
   await fs.writeFile(pathToFile, '', { flag: 'wx' })
 }

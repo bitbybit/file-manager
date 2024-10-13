@@ -41,3 +41,12 @@ export const getFileType = (file) => {
       return 'unknown'
   }
 }
+
+/**
+ * @description Validate entered file name
+ * @param {string} fileName
+ * @returns {boolean}
+ */
+export const isForbiddenFileName = (fileName) => {
+  return (fileName.match(/[\/\\:]/)?.length ?? 0) > 0
+}
