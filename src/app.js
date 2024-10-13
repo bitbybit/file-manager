@@ -14,6 +14,7 @@ import { fsCatHandler, isCommandFsCat } from './commands/fs/cat.js'
 import { fsAddHandler, isCommandFsAdd } from './commands/fs/add.js'
 import { fsRnHandler, isCommandFsRn } from './commands/fs/rn.js'
 import { fsCpHandler, isCommandFsCp } from './commands/fs/cp.js'
+import { fsMvHandler, isCommandFsMv } from './commands/fs/mv.js'
 
 /**
  * @description After program work finished (`ctrl` + `c` pressed or user sent `.exit` command into console) the program displays the following text in the console
@@ -58,6 +59,10 @@ const commandHandler = async (input) => {
 
       case isCommandFsCp(input):
         await fsCpHandler(input)
+        break
+
+      case isCommandFsMv(input):
+        await fsMvHandler(input)
         break
 
       default:
