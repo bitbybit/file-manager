@@ -1,4 +1,4 @@
-import { displayInvalidInput } from '../helpers/common.js'
+import { displayInvalidInput } from '../helpers/messages.js'
 
 /**
  * @description Unknown command handler

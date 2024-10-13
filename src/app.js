@@ -4,7 +4,7 @@ import {
   displayGreeting,
   displayOperationFailed,
   displayWorkingDirectory
-} from './helpers/common.js'
+} from './helpers/messages.js'
 import { store } from './store.js'
 import { unknownHandler } from './commands/unknown.js'
 import { isCommandNavigationUp, navigationUpHandler } from './commands/navigation/up.js'
