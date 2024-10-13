@@ -1,4 +1,4 @@
-import { isCommand } from '../../helpers/common.js'
+import { COMMAND_SEPARATOR, isCommand } from '../../helpers/common.js'
 import { isForbiddenFileName } from '../../helpers/fs.js'
 import { store } from '../../store.js'
 import fs from 'node:fs/promises'
@@ -22,7 +22,9 @@ export const isCommandFsAdd = (input) => {
  * @throws {Error}
  */
 export const fsAddHandler = async (input) => {
-  const props = input.substring(name.length).trim()
+  const props = input
+    .substring(name.length + COMMAND_SEPARATOR.length)
+    .trim()
 
   if (isForbiddenFileName(props)) {
     throw new Error(`${props} is not a valid file name`)

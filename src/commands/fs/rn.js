@@ -22,7 +22,10 @@ export const isCommandFsRn = (input) => {
  * @throws {Error}
  */
 export const fsRnHandler = async (input) => {
-  const props = input.substring(name.length).trim().split(COMMAND_SEPARATOR)
+  const props = input
+    .substring(name.length + COMMAND_SEPARATOR.length)
+    .trim()
+    .split(COMMAND_SEPARATOR)
 
   const fileName = props[0]
   const fileNameRenamed = props.slice(1).join(COMMAND_SEPARATOR)

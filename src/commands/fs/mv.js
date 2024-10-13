@@ -22,7 +22,10 @@ export const isCommandFsMv = (input) => {
  * @throws {Error}
  */
 export const fsMvHandler = async (input) => {
-  const props = input.substring(name.length).trim().split(COMMAND_SEPARATOR)
+  const props = input
+    .substring(name.length + COMMAND_SEPARATOR.length)
+    .trim()
+    .split(COMMAND_SEPARATOR)
 
   const fileName = props[0]
   const directory = props.slice(1).join(COMMAND_SEPARATOR)

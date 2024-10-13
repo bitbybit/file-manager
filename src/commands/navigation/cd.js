@@ -1,4 +1,4 @@
-import { isCommand } from '../../helpers/common.js'
+import { COMMAND_SEPARATOR, isCommand } from '../../helpers/common.js'
 import { isDirectory } from '../../helpers/fs.js'
 import { store } from '../../store.js'
 import path from 'node:path'
@@ -21,7 +21,9 @@ export const isCommandNavigationCd = (input) => {
  * @throws {Error}
  */
 export const navigationCdHandler = async (input) => {
-  const props = input.substring(name.length).trim()
+  const props = input
+    .substring(name.length + COMMAND_SEPARATOR.length)
+    .trim()
 
   const newDirectory = path.isAbsolute(props) ?
     path.resolve(props) : path.join(store.directory, props)

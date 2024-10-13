@@ -1,4 +1,4 @@
-import { isCommand } from '../../helpers/common.js'
+import { COMMAND_SEPARATOR, isCommand } from '../../helpers/common.js'
 import { store } from '../../store.js'
 import fs from 'node:fs/promises'
 import path from 'node:path'
@@ -20,7 +20,9 @@ export const isCommandFsCat = (input) => {
  * @returns {Promise<void>}
  */
 export const fsCatHandler = async (input) => {
-  const props = input.substring(name.length).trim()
+  const props = input
+    .substring(name.length + COMMAND_SEPARATOR.length)
+    .trim()
 
   const pathToFile = path.isAbsolute(props) ?
     path.resolve(props) : path.join(store.directory, props)
