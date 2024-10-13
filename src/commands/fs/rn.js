@@ -1,5 +1,5 @@
 import { COMMAND_SEPARATOR, isCommand } from '../../helpers/common.js'
-import { canAccessPath, isForbiddenFileName } from '../../helpers/fs.js'
+import { canAccessPath, isDirectory, isForbiddenFileName } from '../../helpers/fs.js'
 import { store } from '../../store.js'
 import fs from 'node:fs/promises'
 import path from 'node:path'
@@ -33,6 +33,12 @@ export const fsRnHandler = async (input) => {
 
   const pathToFile = path.isAbsolute(fileName) ?
     path.resolve(fileName) : path.join(store.directory, fileName)
+
+  const isNotFile = await isDirectory(pathToFile)
+
+  if (isNotFile) {
+    throw new Error(`${fileName} is not a file`)
+  }
 
   const pathToFileRenamed = path.join(path.dirname(pathToFile), fileNameRenamed)
 
