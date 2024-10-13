@@ -22,6 +22,25 @@ export const canAccessPath = async (path) => {
 }
 
 /**
+ * @description Check if path is a directory
+ * @param {string} path
+ * @returns {Promise<boolean>}
+ */
+export const isDirectory = async (path) => {
+  try {
+    const stat = await fs.stat(path)
+
+    return stat.isDirectory()
+  } catch (e) {
+    if (e?.code === 'ENOENT') {
+      return false
+    } else {
+      throw e
+    }
+  }
+}
+
+/**
  * @description Get file type description
  * @param {Dirent} file
  * @returns {string}
