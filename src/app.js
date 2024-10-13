@@ -8,6 +8,7 @@ import {
 import { store } from './store.js'
 import { isCommandNavigationUp, navigationUpHandler } from './commands/navigation/up.js'
 import { unknownHandler } from './commands/unknown.js'
+import { isCommandNavigationCd, navigationCdHandler } from './commands/navigation/cd.js'
 
 /**
  * @description After program work finished (`ctrl` + `c` pressed or user sent `.exit` command into console) the program displays the following text in the console
@@ -28,6 +29,10 @@ const commandHandler = async (input) => {
     switch (true) {
       case isCommandNavigationUp(input):
         await navigationUpHandler()
+        break
+
+      case isCommandNavigationCd(input):
+        await navigationCdHandler(input)
         break
 
       default:
