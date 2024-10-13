@@ -1,4 +1,6 @@
+import { pipeline } from 'node:stream/promises'
 import fs from 'node:fs/promises'
+import path from 'node:path'
 
 /**
  * @description Try to access specified path
@@ -69,4 +71,45 @@ export const getFileType = (file) => {
  */
 export const isForbiddenFileName = (fileName) => {
   return (fileName.match(/[\/\\:]/)?.length ?? 0) > 0
+}
+
+/**
+ * @description Copy file to specified directory using Readable and Writable streams
+ * @param {Object} payload
+ * @param {string} payload.pathToFile
+ * @param {string} payload.pathToDirectory
+ * @returns {Promise<void>}
+ * @throws {Error}
+ */
+export const copyFileToDirectory = async ({
+  pathToFile,
+  pathToDirectory
+}) => {
+  const isNotFile = await isDirectory(pathToFile)
+
+  if (isNotFile) {
+    throw new Error(`${pathToFile} is not a file`)
+  }
+
+  const isMissingDirectory = !(await isDirectory(pathToDirectory))
+
+  if (isMissingDirectory) {
+    throw new Error(`${pathToDirectory} is missing`)
+  }
+
+  const pathToFileCopy = path.join(pathToDirectory, path.basename(pathToFile))
+
+  const fileCopyExists = await canAccessPath(pathToFileCopy)
+
+  if (fileCopyExists) {
+    throw new Error(`${pathToFileCopy} already exists`)
+  }
+
+  const file = await fs.open(pathToFile, 'r')
+  const fileCopy = await fs.open(pathToFileCopy, 'w')
+
+  const stream = file.createReadStream()
+  const streamCopy = fileCopy.createWriteStream()
+
+  await pipeline(stream, streamCopy)
 }
