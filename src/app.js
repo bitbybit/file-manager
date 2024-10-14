@@ -18,6 +18,8 @@ import { fsMvHandler, isCommandFsMv } from './commands/fs/mv.js'
 import { fsRmHandler, isCommandFsRm } from './commands/fs/rm.js'
 import { isCommandOs, osHandler } from './commands/os.js'
 import { hashHandler, isCommandHash } from './commands/hash.js'
+import { archiveCompressHandler, isCommandArchiveCompress } from './commands/archive/compress.js'
+import { archiveDecompressHandler, isCommandArchiveDecompress } from './commands/archive/decompress.js'
 
 /**
  * @description After program work finished (`ctrl` + `c` pressed or user sent `.exit` command into console) the program displays the following text in the console
@@ -78,6 +80,14 @@ const commandHandler = async (input) => {
 
       case isCommandHash(input):
         await hashHandler(input)
+        break
+
+      case isCommandArchiveCompress(input):
+        await archiveCompressHandler(input)
+        break
+
+      case isCommandArchiveDecompress(input):
+        await archiveDecompressHandler(input)
         break
 
       default:
