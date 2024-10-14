@@ -5,7 +5,7 @@ import {
   displayOperationFailed,
   displayWorkingDirectory
 } from './helpers/messages.js'
-import { store } from './store.js'
+import { setDefaultDirectory, setUserName } from './store.js'
 import { unknownHandler } from './commands/unknown.js'
 import { isCommandNavigationUp, navigationUpHandler } from './commands/navigation/up.js'
 import { isCommandNavigationCd, navigationCdHandler } from './commands/navigation/cd.js'
@@ -16,6 +16,7 @@ import { fsRnHandler, isCommandFsRn } from './commands/fs/rn.js'
 import { fsCpHandler, isCommandFsCp } from './commands/fs/cp.js'
 import { fsMvHandler, isCommandFsMv } from './commands/fs/mv.js'
 import { fsRmHandler, isCommandFsRm } from './commands/fs/rm.js'
+import { isCommandOs, osHandler } from './commands/os.js'
 
 /**
  * @description After program work finished (`ctrl` + `c` pressed or user sent `.exit` command into console) the program displays the following text in the console
@@ -70,6 +71,10 @@ const commandHandler = async (input) => {
         await fsRmHandler(input)
         break
 
+      case isCommandOs(input):
+        await osHandler(input)
+        break
+
       default:
         await unknownHandler()
         break
@@ -77,7 +82,7 @@ const commandHandler = async (input) => {
   } catch {
     displayOperationFailed()
   } finally {
-    displayWorkingDirectory(store.directory)
+    displayWorkingDirectory()
   }
 }
 
@@ -102,8 +107,11 @@ const inputHandler = async (chunk) => {
  * @description Initialize an app
  */
 const app = () => {
+  setUserName()
+  setDefaultDirectory()
+
   displayGreeting()
-  displayWorkingDirectory(store.directory)
+  displayWorkingDirectory()
 
   process.stdin.on('data', inputHandler)
   process.on('SIGINT', exitHandler)
