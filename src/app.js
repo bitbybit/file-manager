@@ -17,6 +17,7 @@ import { fsCpHandler, isCommandFsCp } from './commands/fs/cp.js'
 import { fsMvHandler, isCommandFsMv } from './commands/fs/mv.js'
 import { fsRmHandler, isCommandFsRm } from './commands/fs/rm.js'
 import { isCommandOs, osHandler } from './commands/os.js'
+import { hashHandler, isCommandHash } from './commands/hash.js'
 
 /**
  * @description After program work finished (`ctrl` + `c` pressed or user sent `.exit` command into console) the program displays the following text in the console
@@ -73,6 +74,10 @@ const commandHandler = async (input) => {
 
       case isCommandOs(input):
         await osHandler(input)
+        break
+
+      case isCommandHash(input):
+        await hashHandler(input)
         break
 
       default:
