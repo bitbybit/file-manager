@@ -1,6 +1,6 @@
-import { isCommand } from '../../helpers/cli.js'
 import { getFileType } from '../../helpers/fs.js'
 import { store } from '../../store.js'
+import { EOL } from 'node:os'
 import fs from 'node:fs/promises'
 
 export const name = 'ls'
@@ -11,7 +11,7 @@ export const name = 'ls'
  * @returns {boolean}
  */
 export const isCommandNavigationLs = (input) => {
-  return isCommand(input, name)
+  return input.toLowerCase() === `${name}${EOL}`
 }
 
 /**

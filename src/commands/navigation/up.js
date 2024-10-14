@@ -1,5 +1,5 @@
-import { isCommand } from '../../helpers/cli.js'
 import { store } from '../../store.js'
+import { EOL } from 'node:os'
 import path from 'node:path'
 
 export const name = 'up'
@@ -10,7 +10,7 @@ export const name = 'up'
  * @returns {boolean}
  */
 export const isCommandNavigationUp = (input) => {
-  return isCommand(input, name)
+  return input.toLowerCase() === `${name}${EOL}`
 }
 
 /**
