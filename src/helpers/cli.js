@@ -26,3 +26,17 @@ export const getArgsValue = (argsKey, separator = ARG_SEPARATOR) => {
 
   return args.find((item) => item.startsWith(argsKey))?.split(separator)?.[1]
 }
+
+/**
+ * @description Check if property was provided
+ * @param {string} props
+ * @param {string} propKey
+ * @returns {boolean}
+ */
+export const hasProp = (props, propKey) => {
+  return props
+    .split(COMMAND_SEPARATOR)
+    .find(
+      (prop) => prop === `${ARG_PREFIX}${propKey}`
+    ) !== undefined
+}
